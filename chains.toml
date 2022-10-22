@@ -1,0 +1,20 @@
+[[chains]]
+name = "bitsong"
+displayname = "BitSong"
+chain-id = "bitsong-2a"
+rpc = "https://bitsong.rpc.qf3l3k.cloud:444"
+api = "https://bitsong.api.qf3l3k.cloud:444"
+
+[[chains]]
+name = "fetchai"
+displayname = "Fetch.ai"
+chain-id = "fetchhub-4"
+rpc = "https://fetchai.rpc.qf3l3k.cloud:444"
+api = "https://fetchai.api.qf3l3k.cloud:444"
+
+[[chains]]
+name = "sentinel"
+displayname = "Sentinel"
+chain-id = "sentinelhub-2"
+rpc = "https://sentinel.rpc.qf3l3k.cloud:444"
+api = "https://sentinel.api.qf3l3k.cloud:444"
