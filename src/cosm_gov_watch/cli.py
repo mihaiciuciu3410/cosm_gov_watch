@@ -4,9 +4,9 @@ import argparse
 def process_command_line():
     """Command line processor
 
-    :return: name of file with list of hostnames to check
+    :return: parameters
     """
-    cmdparser = argparse.ArgumentParser(prog='ardor_node_check',
+    cmdparser = argparse.ArgumentParser(prog='cosm_gov_watch',
                                         usage='%(prog)s [options] path',
                                         description='Command line application.')
     cmdparser.version = "0.1"

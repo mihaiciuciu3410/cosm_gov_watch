@@ -6,6 +6,13 @@ rpc = "https://bitsong.rpc.qf3l3k.cloud:444"
 api = "https://bitsong.api.qf3l3k.cloud:444"
 
 [[chains]]
+name = "cosmoshub"
+displayname = "Cosmos Hub"
+chain-id = "cosmoshub-4"
+rpc = "https://rpc.cosmos.chaintools.tech:443"
+api = "https://api.cosmos.chaintools.tech:443"
+
+[[chains]]
 name = "fetchai"
 displayname = "Fetch.ai"
 chain-id = "fetchhub-4"
