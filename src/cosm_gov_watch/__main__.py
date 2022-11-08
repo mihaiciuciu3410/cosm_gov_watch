@@ -1,11 +1,6 @@
-import json
-import logging
-
-from cosm_gov_watch.cli import process_command_line
 from cosm_gov_watch.api_requests import request_governance
-from cosm_gov_watch.load_config import load_chains
+from config_loader.load_config import load_chains
 from prettytable import PrettyTable
-
 
 proposals_table = PrettyTable()
 proposals_table.title = f"Chain Proposals"

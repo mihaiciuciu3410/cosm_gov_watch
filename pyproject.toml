@@ -6,9 +6,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cosm_gov_watch"
 version = "1.0.0"
-description = "Template command line app."
+description = "Cosmos/Tendermint-based chains governance proposal watcher.."
 readme = "README.md"
-authors = [{ name = "qf3l3k", email = "qf3l3k@chaintools.tech" }]
+authors = [{ name = "qf3l3k", email = "support@chaintools.tech" }]
 license = { file = "LICENSE" }
 classifiers = [
     "License :: OSI Approved :: MIT License",
