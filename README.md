@@ -8,6 +8,8 @@ Once information is collected script send details about proposal to a SLACK CHAN
 
 ## Installation
 
+A) Locally
+
 1. Clone repository and create a Python virtual environment
 ```bash
 $ git clone https://github.com/ChainTools-Tech/cosm_gov_watch
@@ -26,6 +28,11 @@ $ source venv/bin/activate
 ```bash
 (venv) $ pip install -e .
 ```
+
+B) using Dockerfile
+create a .env file for ENV variables
+build image
+run docker container
 
 ## Configuration
 List of chains to check along with endpoints is located in ```config_loader/chains.toml``` file. 
