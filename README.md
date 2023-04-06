@@ -45,11 +45,11 @@ In order to add another chain create new section and populate with appropriate i
 If some chains are not needed just remove chain section from configuration file.
 
 ## ENV Variables
-
+'''
 SLACK_CHANNEL=slack channel name
 SLACK_TOKEN=slack channel token
 SLACK_PERIOD=the proposals will be send at every x minutes
-
+'''
 ## Usage
 ```bash
 (venv) $ cosm_gov_watch              
