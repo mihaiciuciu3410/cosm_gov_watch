@@ -30,9 +30,11 @@ $ source venv/bin/activate
 ```
 
 B) using Dockerfile
-create a .env file for ENV variables
-build image
-run docker container
+```
+- create a .env file for ENV variables
+- build image
+- run docker container
+```
 
 ## Configuration
 List of chains to check along with endpoints is located in ```config_loader/chains.toml``` file. 
