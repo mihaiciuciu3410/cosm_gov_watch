@@ -9,6 +9,8 @@ import requests
 import ssl
 import certifi
 from colorama import Fore, Style
+import time
+import schedule
 
 ssl_context = ssl.create_default_context(cafile=certifi.where())
 
@@ -19,15 +21,12 @@ proposals_table.align = "l"
 proposals_table.border = True
 
 
-def main():
-    SLACK_CHANNEL = "xxxx"
-    client = WebClient(token="xxxx", ssl=ssl_context)
+def api():
+    SLACK_CHANNEL=os.environ.get("SLACK_CHANNEL")
+    client = WebClient(token=os.environ.get("SLACK_TOKEN"), ssl=ssl_context)
     chains = load_chains()
     for chain in chains["chains"]:
-        # proposals_table.add_row([chain["name"], "--", "--", "--", "--"])
-        # print(f'\x1b[1K\rProcessing: {chain["name"]} -> calling API: {chain["api"]}', end = "")
         governance = request_governance(chain["api"], chain["version"])
-        #proposal_dict["chain"] = []
         if chain["version"] == "v1beta1":
             try:
                 for proposal in governance['proposals']:
@@ -40,9 +39,6 @@ def main():
                         client.chat_postMessage(channel="#" + SLACK_CHANNEL, text=chain["name"]+ "  " +\
                                                 proposal['proposal_id']+ "  " +proposal['content']['@type'].rsplit('.', 1)[-1]+"  "+proposal['content']['title'][:60]+"  "+\
                                                 proposal['status']+ "  " +chain["proposal_link"]+proposal['proposal_id'])
-                        #print(f"{Fore.RED}{chain['name']}{Style.RESET_ALL}" +"  " + \
-                        #      proposal['proposal_id'] +"  " + proposal['content']['@type'].rsplit('.', 1)[-1] +"  " +proposal['content']['title'][:60] +"  " + \
-                        #      proposal['status'] + "  " + chain["proposal_link"] + proposal['proposal_id'])
             except KeyError as e:
                 check_endpoints = True
                 proposals_table.add_row([chain["name"],
@@ -64,9 +60,7 @@ def main():
                                                  proposal['messages'][0]['content']['@type'].rsplit('.', 1)[-1],
                                                  proposal['messages'][0]['content']['title'][:60],
                                                  proposal['status']])
-                        #client.chat_postMessage(channel="#" + SLACK_CHANNEL, text=chain["name"]+"  "+\
-                        #                        proposal['id']+" "+proposal['messages'][0]['content']['@type'].rsplit('.', 1)[-1]+"  "+proposal['messages'][0]['content']['title'][:60]+"  "+\
-                        #                        proposal['status']+"  " +chain["proposal_link"]+proposal['proposal_id'])
+
             except KeyError as e:
                 check_endpoints = True
                 proposals_table.add_row([chain["name"],
@@ -78,13 +72,14 @@ def main():
 ==========
 {chain["name"].upper()}  API error - check api endpoint
 ==========""")
-    #print (f'\rProcessing done. Displaying results.')
-    # print(proposals_table.get_string())
 
+
+schedule.every(5).minutes.do(api)
+
+def main():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 if __name__ == '__main__':
     main()
-
-
-
-
