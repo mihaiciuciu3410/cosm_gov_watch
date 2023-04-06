@@ -73,8 +73,8 @@ def api():
 {chain["name"].upper()}  API error - check api endpoint
 ==========""")
 
-
-schedule.every(5).minutes.do(api)
+time_period = os.environ.get("SLACK_PERIOD")
+schedule.every(time_period).minutes.do(api)
 
 def main():
     while True:

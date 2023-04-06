@@ -1,8 +1,7 @@
 # Cosmos Governance Watcher
 Script pulls list of active proposals from chains enumerated in configuration file.
 Governance proposals information is pulled via API endpoint.
-Once information is collected script produces table with collected data.
-Even if particular chain has no active proposals it will be listed in table.
+Once information is collected script send details about proposal to a SLACK CHANNEL
 
 ## Requirements
  - Python 3.8 or newer
@@ -45,7 +44,11 @@ proposal_link = "https://www.mintscan.io/axelar/proposals/"
 In order to add another chain create new section and populate with appropriate information.
 If some chains are not needed just remove chain section from configuration file.
 
+## ENV Variables
 
+SLACK_CHANNEL=slack channel name
+SLACK_TOKEN=slack channel token
+SLACK_PERIOD=the proposals will be send at every x minutes
 
 ## Usage
 ```bash
