@@ -133,16 +133,6 @@ api = "https://celestia-testnet.api.kjnodes.com"
 version = "v1beta1"
 proposal_link = "https://testnet.mintscan.io/celestia-incentivized-testnet/proposals/"
 
-
-[[chains]]
-# de gasit api
-name = "humansai-testnet"
-displayname = "Humansai-Testnet"
-chain-id = "testnet-1"
-rpc = "https://rpc-testnet.humans.zone"
-api = "https://api-testnet.humans.zone"
-version = "v1"
-
 [[chains]]
 name = "axelar-mainnet"
 displayname = "Axelar-Mainnet"
@@ -196,3 +186,21 @@ rpc = "https://dymension-testnet.rpc.kjnodes.com/"
 api = "https://dymension-testnet.api.kjnodes.com"
 version = "v1beta1"
 proposal_link = "https://dymension.explorers.guru/proposal/"
+
+[[chains]]
+name = "aura-mainnet"
+displayname = "Aura-Mainnet"
+chain-id = "xstaxy-1"
+rpc = "https://aura.rpc.kjnodes.com/"
+api = "https://aura.api.kjnodes.com"
+version = "v1beta1"
+proposal_link = "https://aurascan.io/votings/"
+
+[[chains]]
+name = "aura-testnet"
+displayname = "Aura-Testnet"
+chain-id = "euphoria-2"
+rpc = "https://aura-testnet.api.kjnodes.com/"
+api = "https://aura-testnet.api.kjnodes.com"
+version = "v1beta1"
+proposal_link = "https://euphoria.aurascan.io/votings/"

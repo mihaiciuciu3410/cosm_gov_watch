@@ -14,38 +14,21 @@ import schedule
 
 ssl_context = ssl.create_default_context(cafile=certifi.where())
 
-proposals_table = PrettyTable()
-proposals_table.title = f"Chain Proposals"
-proposals_table.field_names = ["Chain", "ID", "Type", "Title", "Status"]
-proposals_table.align = "l"
-proposals_table.border = True
-
-
 def api():
     SLACK_CHANNEL=os.environ.get("SLACK_CHANNEL")
     client = WebClient(token=os.environ.get("SLACK_TOKEN"), ssl=ssl_context)
     chains = load_chains()
     for chain in chains["chains"]:
+        print(f"info: extract proposals for chain: {chain}")
         governance = request_governance(chain["api"], chain["version"])
         if chain["version"] == "v1beta1":
             try:
                 for proposal in governance['proposals']:
                     if proposal['status'] == "PROPOSAL_STATUS_VOTING_PERIOD":
-                        proposals_table.add_row([chain["name"],
-                                                 proposal['proposal_id'],
-                                                 proposal['content']['@type'].rsplit('.', 1)[-1],
-                                                 proposal['content']['title'][:60],
-                                                 proposal['status']])
                         client.chat_postMessage(channel="#" + SLACK_CHANNEL, text=chain["name"]+ "  " +\
                                                 proposal['proposal_id']+ "  " +proposal['content']['@type'].rsplit('.', 1)[-1]+"  "+proposal['content']['title'][:60]+"  "+\
                                                 proposal['status']+ "  " +chain["proposal_link"]+proposal['proposal_id'])
             except KeyError as e:
-                check_endpoints = True
-                proposals_table.add_row([chain["name"],
-                                         "API error",
-                                         "API error",
-                                         "API error",
-                                         "API error"])
                 client.chat_postMessage(channel="#" + SLACK_CHANNEL, text=f"""
 ==========
 {chain["name"].upper()} API error - check api endpoint
@@ -55,19 +38,12 @@ def api():
             try:
                 for proposal in governance['proposals']:
                     if proposal['status'] == "PROPOSAL_STATUS_VOTING_PERIOD":
-                        proposals_table.add_row([chain["name"],
-                                                 proposal['id'],
-                                                 proposal['messages'][0]['content']['@type'].rsplit('.', 1)[-1],
-                                                 proposal['messages'][0]['content']['title'][:60],
-                                                 proposal['status']])
-
+                        client.chat_postMessage(channel="#" + SLACK_CHANNEL, text=chain["name"] + "  " + \
+                                                                                  proposal['proposal_id'] + "  " +
+                                                                                  proposal['messages'][0]['content']['@type'].rsplit('.', 1)[-1] + "  " +
+                                                                                  proposal['messages'][0]['content']['title'][:60] + "  " + \
+                                                                                  proposal['status'] + "  " + chain["proposal_link"] + proposal['proposal_id'])
             except KeyError as e:
-                check_endpoints = True
-                proposals_table.add_row([chain["name"],
-                                         "API error",
-                                         "API error",
-                                         "API error",
-                                         "API error"])
                 client.chat_postMessage(channel="#" + SLACK_CHANNEL, text=f"""
 ==========
 {chain["name"].upper()}  API error - check api endpoint
