@@ -39,10 +39,10 @@ def api():
                 for proposal in governance['proposals']:
                     if proposal['status'] == "PROPOSAL_STATUS_VOTING_PERIOD":
                         client.chat_postMessage(channel="#" + SLACK_CHANNEL, text=chain["name"] + "  " + \
-                                                                                  proposal['proposal_id'] + "  " +
-                                                                                  proposal['messages'][0]['content']['@type'].rsplit('.', 1)[-1] + "  " +
-                                                                                  proposal['messages'][0]['content']['title'][:60] + "  " + \
-                                                                                  proposal['status'] + "  " + chain["proposal_link"] + proposal['proposal_id'])
+                                                                                  proposal['id'] + "  " +
+                                                                                  proposal['messages'][0]['@type'].rsplit('.', 1)[-1] + "  " +
+                                                                                  proposal['title'] + "  " + \
+                                                                                  proposal['status'] + "  " + chain["proposal_link"] + proposal['id'])
             except KeyError as e:
                 client.chat_postMessage(channel="#" + SLACK_CHANNEL, text=f"""
 ==========
